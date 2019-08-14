@@ -1,6 +1,10 @@
 @import 'styles/utils.scss';
 
 .header {
+  position: fixed;
+  background: #1d2a38;
+  height: 80px;
+  padding: 20px;
   top: 0;
 	left: 0;
   width: 100%;

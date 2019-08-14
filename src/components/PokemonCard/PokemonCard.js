@@ -34,30 +34,23 @@ const PokemonCard = memo(function PokemonCard({ id }) {
           dispatch(setLoading(false));
         });
     }
-  }, [id]);
+  }, [id, dispatch]);
 
   const toggleIsFlipped = useCallback(() => {
-    console.log('flip');
     setIsFlipped(!isFlipped);
   }, [isFlipped]);
 
-  if (id === 0 || !pokemonCard) {
+  if (id === 0) {
     return (
       <div className="pokemon-card pokemon-card--placeholder">
-        {id === 0 && (
-          <>
-            <h2 className="pokemon-card__name">?</h2>
-
-            <Image src={pokemonEgg} alt="Pokemon Egg" className="pokemon-card__image pokemon-card__image--egg" />
-
-            <div>
-              Click "<strong>Generate</strong>" for a random Pokemon!
-            </div>
-          </>
-        )}
+        <h2 className="pokemon-card__name">?</h2>
+        <Image src={pokemonEgg} alt="Pokemon Egg" className="pokemon-card__image pokemon-card__image--egg" />
+        <div>Who's Next?</div>
       </div>
     );
   }
+
+  if (!pokemonCard) return null;
 
   return (
     <button className={`pokemon-card${isFlipped ? ' pokemon-card--flipped' : ''}`} onClick={toggleIsFlipped}>

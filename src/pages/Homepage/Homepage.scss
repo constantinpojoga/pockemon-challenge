@@ -1,6 +1,12 @@
 @import 'styles/utils.scss';
 
 .homepage {
+  background-image: url(https://wallup.net/wp-content/uploads/2017/11/10/85136-threadless-simple-Mudkip-Pokemon-748x565.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom left;
+  min-height: calc(100vh - 80px);
+  
   &__pokemon-cards {
     margin-bottom: 30px;
 

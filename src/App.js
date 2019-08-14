@@ -21,7 +21,7 @@ function App() {
               <Header />
 
               <div className="main">
-                <Suspense fallback={<PageSpinner />}>
+                <Suspense fallback={<></>}>
                   <Switch>
                     {/* <Route exact path="/character/id" component={Character} /> */}
                     <Route exact path="/" component={Homepage} />
@@ -31,6 +31,8 @@ function App() {
               </div>
             </ScrollToTop>
           </Router>
+
+          <PageSpinner />
         </Provider>
       </ErrorBoundary>
     </div>
