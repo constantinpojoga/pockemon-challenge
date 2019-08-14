@@ -1,11 +1,9 @@
 import React, { memo, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button, Collapse } from 'reactstrap';
+import { Container, Row, Col, Button} from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import PokemonCard from 'components/PokemonCard/PokemonCard';
-import { handleFetchError } from 'shared/functions';
-
-import { setLoading } from 'store/actions';
+import { API_MAX } from 'shared/constants';
 import './Homepage.scss';
 
 const Homepage = memo(function Homepage() {
@@ -13,18 +11,41 @@ const Homepage = memo(function Homepage() {
   const defaultPokemonIds = useSelector(state => state.defaultPokemonIds);
   const [randomPokemonId, setRandomPokemonId] = useState(0);
 
+  const handleGenerate = useCallback(() => {
+    setRandomPokemonId(Math.trunc(Math.random() * API_MAX) + 1);
+  }, []);
+
+  const handleReset = useCallback(() => {
+    setRandomPokemonId(0);
+  }, []);
+
   return (
     <div className="homepage">
       <Container>
         <h1>Homepage </h1>
-        <Row>
-          {defaultPokemonIds &&
-            [...defaultPokemonIds, randomPokemonId].map(pokemonId => (
-              <Col key={pokemonId} sm="6" md="3">
-                <PokemonCard id={pokemonId} />
-              </Col>
-            ))}
-        </Row>
+
+        <div className="homepage__pokemon-cards">
+          <Row>
+            {defaultPokemonIds &&
+              [...defaultPokemonIds, randomPokemonId].map((pokemonId, id) => (
+                <Col key={id} sm="6" lg="3">
+                  <PokemonCard id={pokemonId} />
+                </Col>
+              ))}
+          </Row>
+        </div>
+
+        <div className="homepage__button-wrapper">
+          <h2>Generate a random Pokemon: </h2>
+
+          <Button color="primary" outline className="homepage__generate-button" onClick={handleGenerate}>
+            Generate
+          </Button>
+
+          <Button color="danger" outline onClick={handleReset}>
+            Reset
+          </Button>
+        </div>
       </Container>
     </div>
   );

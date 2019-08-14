@@ -1,5 +1,19 @@
 @import 'styles/utils.scss';
 
 .homepage {
+  &__pokemon-cards {
+    margin-bottom: 30px;
 
+    @media screen and (min-width: 768px) {
+      margin-bottom: 50px;
+    }
+  }
+
+  &__button-wrapper {
+    text-align: center;
+  }
+
+  &__generate-button {
+    margin-right: 15px;
+  }
 }

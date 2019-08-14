@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,6 +12,7 @@ import './PokemonCard.scss';
 const PokemonCard = memo(function PokemonCard({ id }) {
   const dispatch = useDispatch();
   const [pokemonCard, setPokemonCard] = useState();
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -35,46 +36,75 @@ const PokemonCard = memo(function PokemonCard({ id }) {
     }
   }, [id]);
 
-  if (!pokemonCard) {
+  const toggleIsFlipped = useCallback(() => {
+    console.log('flip');
+    setIsFlipped(!isFlipped);
+  }, [isFlipped]);
+
+  if (id === 0 || !pokemonCard) {
     return (
-      <div className="pokemon-card">
-        <h2 className="pokemon-card__name">Coming soon.</h2>
+      <div className="pokemon-card pokemon-card--placeholder">
+        {id === 0 && (
+          <>
+            <h2 className="pokemon-card__name">?</h2>
 
-        <Image src={pokemonEgg} alt="Pokemon Egg" className="pokemon-card__image pokemon-card__image--egg" />
+            <Image src={pokemonEgg} alt="Pokemon Egg" className="pokemon-card__image pokemon-card__image--egg" />
 
-        <div>
-          Click the "<strong>Generate</strong>" button to generate a random Pokemon.
-        </div>
+            <div>
+              Click "<strong>Generate</strong>" for a random Pokemon!
+            </div>
+          </>
+        )}
       </div>
     );
   }
 
   return (
-    <div className="pokemon-card">
-      {pokemonCard.name && <h2 className="pokemon-card__name">{pokemonCard.name}</h2>}
+    <button className={`pokemon-card${isFlipped ? ' pokemon-card--flipped' : ''}`} onClick={toggleIsFlipped}>
+      <div className="pokemon-card__front">
+        {pokemonCard.name && <h2 className="pokemon-card__name">{pokemonCard.name}</h2>}
 
-      {pokemonCard.sprites && (
-        <Image src={pokemonCard.sprites.front_default} alt={pokemonCard.name} className="pokemon-card__image" />
-      )}
+        {pokemonCard.sprites && (
+          <Image
+            src={pokemonCard.sprites.front_default}
+            alt={pokemonCard.name}
+            className="pokemon-card__image pokemon-card__image--front"
+          />
+        )}
 
-      {pokemonCard.height && (
-        <div>
-          Height: <strong>{pokemonCard.height}</strong>
-        </div>
-      )}
+        <div className="pokemon-card__front-cta" />
+      </div>
 
-      {pokemonCard.weight && (
-        <div>
-          Weight: <strong>{pokemonCard.weight}</strong>
-        </div>
-      )}
+      <div className="pokemon-card__back">
+        {pokemonCard.name && <h2 className="pokemon-card__name">{pokemonCard.name}</h2>}
 
-      {pokemonCard.base_experience && (
-        <div>
-          Experience: <strong>{pokemonCard.base_experience}</strong>
-        </div>
-      )}
-    </div>
+        {pokemonCard.sprites && (
+          <Image
+            src={pokemonCard.sprites.back_default}
+            alt={pokemonCard.name}
+            className="pokemon-card__image pokemon-card__image--back"
+          />
+        )}
+
+        {pokemonCard.height && (
+          <div>
+            Height: <strong>{pokemonCard.height}</strong>
+          </div>
+        )}
+
+        {pokemonCard.weight && (
+          <div>
+            Weight: <strong>{pokemonCard.weight}</strong>
+          </div>
+        )}
+
+        {pokemonCard.base_experience && (
+          <div>
+            Experience: <strong>{pokemonCard.base_experience}</strong>
+          </div>
+        )}
+      </div>
+    </button>
   );
 });
 

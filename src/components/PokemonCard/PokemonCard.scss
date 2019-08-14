@@ -1,23 +1,127 @@
 @import 'styles/utils.scss';
 
 .pokemon-card {
-  box-shadow: 0 0 5px rgba(0, 0, 0, .2);
-  padding: 20px;
+  display: block;
+  width: 100%;
+  position: relative;
+  appearance: none;
+  background: none;
+  border: none;
   margin-bottom: 30px;
-  height: 100%;
+  min-height: 240px;
+  cursor: pointer;
+  perspective: 800px;
+  backface-visibility: hidden;
+  font-size: 14px;
+
+  @media screen and (min-width: 992px) {
+    font-size: 15px;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+    transition: all 0.2s;
+    outline: none;
+  }
+
+  &--placeholder {
+    text-align: center;
+    padding: 20px;
+    cursor: default;
+    pointer-events: none;
+
+    &:hover,
+    &:focus {
+      transform: none;
+    }
+  }
+
+  &__front,
+  &__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+    transition-duration: .5s;
+    transition-property: transform, opacity;
+  }
+  
+  &--placeholder,
+  &__front {
+    background-color: #e4e4e4;
+  }
+
+  &__front {
+    border-bottom: 8px solid $orange;
+
+    .pokemon-card--flipped & {
+      transform: rotateY(180deg);
+      opacity: 0;
+    }
+  }
+
+  &__back {
+    transform: rotateY(-180deg);
+    opacity: 0;
+    color: #fff;
+    background-color: $orange;
+    text-align: left;
+
+    &:after {
+      content: '×';
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .pokemon-card--flipped & {
+      opacity: 1;
+      transform: rotateY(0deg);
+    }
+  }
 
   &__name {
     text-transform: capitalize;
     text-align: center;
+    font-size: 16px;
+
+    @media screen and (min-width: 992px) {
+      font-size: 20px;
+    }
   }
 
   &__image {
     width: 150px;
-    margin: 0 auto;
+    margin: -20px auto;
 
     &--egg {
       width: 80px;
-      margin: 40px auto;
+      margin: 20px auto;
+    }
+
+    &--back {
+      margin: -20px auto -25px;
+    }
+  }
+
+  &__front-cta {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &:before {
+      content: 'TAP FOR INFO';
+
+      @media (hover: hover) {
+        content: 'CLICK FOR INFO';
+    }
     }
   }
 }
