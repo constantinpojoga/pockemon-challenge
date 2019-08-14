@@ -1,0 +1,10 @@
+@import './variables.scss';
+@import './colors.scss';
+
+%clearfix:after {
+    content: " "; 
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
