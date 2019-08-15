@@ -44,8 +44,8 @@ const Homepage = memo(function Homepage() {
   }, []);
 
   const handleReset = useCallback(() => {
-    setRandomPokemonId(0);
-  }, [dispatch]);
+    setRandomPokemonId(null);
+  }, []);
 
   return (
     <div className="homepage">
@@ -55,7 +55,7 @@ const Homepage = memo(function Homepage() {
         <div className="homepage__pokemon-cards">
           <Row>
             {defaultPokemonData &&
-              [...defaultPokemonData].map((pokemonData, id) => (
+              defaultPokemonData.map((pokemonData, id) => (
                 <Col key={id} xs="6" lg="3">
                   <PokemonCard pokemonData={pokemonData} />
                 </Col>
@@ -79,7 +79,7 @@ const Homepage = memo(function Homepage() {
           <h2>Generate a random Pokemon: </h2>
 
           <Button color="primary" outline className="homepage__generate-button" onClick={handleGenerate}>
-            Generate
+            Random Pokemon
           </Button>
 
           <Button color="danger" outline onClick={handleReset}>
