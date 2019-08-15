@@ -7,6 +7,7 @@ import { addDefaultPokemonData, setRandomPokemonData, setLoading } from 'store/a
 import { API_MAX } from 'shared/constants';
 import { fetchPokemon } from 'shared/functions';
 import pokemonEgg from './pokemon-egg.png';
+import 'shared/images/page-background.jpg';
 import './Homepage.scss';
 
 const Homepage = memo(function Homepage() {
@@ -50,7 +51,7 @@ const Homepage = memo(function Homepage() {
   return (
     <div className="homepage">
       <Container>
-        <h1>Homepage </h1>
+        <h1>Pokemon challenge</h1>
 
         <div className="homepage__pokemon-cards">
           <Row>
@@ -76,7 +77,7 @@ const Homepage = memo(function Homepage() {
         </div>
 
         <div className="homepage__button-wrapper">
-          <h2>Generate a random Pokemon: </h2>
+          <h2>Generate a random Pokemon:</h2>
 
           <Button color="primary" outline className="homepage__generate-button" onClick={handleGenerate}>
             Random Pokemon
