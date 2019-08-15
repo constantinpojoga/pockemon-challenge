@@ -23,14 +23,20 @@
   }
 
   &__placeholder {
+    position: relative;
     margin-bottom: 30px;
     padding: 20px;
-    min-height: 240px;
+    min-height: 200px;
     font-size: 14px;
     text-align: center;
     cursor: default;
     pointer-events: none;
     background-color: $lightGray;
+    border-bottom: 8px solid $green;
+
+    @media screen and (min-width: 768px) {
+      min-height: 240px;
+    }
 
     @media screen and (min-width: 992px) {
       font-size: 15px;
@@ -48,7 +54,16 @@
   }
 
   &__placeholder-image {
-    width: 80px;
-    margin: 20px auto;
+    width: 60px;
+    margin: 10px auto;
+  }
+
+  &__placeholder-text {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    text-transform: uppercase;
   }
 }

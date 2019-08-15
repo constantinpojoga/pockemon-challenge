@@ -61,7 +61,7 @@ const Homepage = memo(function Homepage() {
                 <div className="homepage__placeholder">
                   <h2 className="homepage__placeholder-name">?</h2>
                   <Image src={pokemonEgg} alt="Pokemon Egg" className="homepage__placeholder-image" />
-                  <div>Who's Next?</div>
+                  <div className="homepage__placeholder-text">Who's Next?</div>
                 </div>
               )}
             </Col>
