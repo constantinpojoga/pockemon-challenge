@@ -28,17 +28,15 @@ const Homepage = memo(function Homepage() {
 
   const [randomPokemonId, setRandomPokemonId] = useState(0);
   useEffect(() => {
-    if (randomPokemonId) {
+    if (!randomPokemonData && randomPokemonId) {
       dispatch(setLoading(true));
 
       fetchPokemon(randomPokemonId)
         .then(data => dispatch(setRandomPokemonData(data)))
         .catch(error => console.log(error.message))
         .finally(() => dispatch(setLoading(false)));
-    } else {
-      dispatch(setRandomPokemonData(null));
     }
-  }, [randomPokemonId, dispatch]);
+  }, [randomPokemonData, randomPokemonId, dispatch]);
 
   const handleGenerate = useCallback(() => {
     setRandomPokemonId(Math.trunc(Math.random() * API_MAX) + 1);
@@ -46,7 +44,8 @@ const Homepage = memo(function Homepage() {
 
   const handleReset = useCallback(() => {
     setRandomPokemonId(null);
-  }, []);
+    dispatch(setRandomPokemonData(null));
+  }, [dispatch]);
 
   return (
     <div className="homepage">
