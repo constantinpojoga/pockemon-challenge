@@ -1,7 +1,6 @@
 import React, { memo, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Image from 'components/Image/Image';
 import { handleFetchError } from 'shared/functions';
 import { setLoading } from 'store/actions';

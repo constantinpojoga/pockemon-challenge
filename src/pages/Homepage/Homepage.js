@@ -1,6 +1,5 @@
 import React, { memo, useState, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Container, Row, Col, Button} from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import PokemonCard from 'components/PokemonCard/PokemonCard';
 import { API_MAX } from 'shared/constants';
@@ -28,7 +27,7 @@ const Homepage = memo(function Homepage() {
           <Row>
             {defaultPokemonIds &&
               [...defaultPokemonIds, randomPokemonId].map((pokemonId, id) => (
-                <Col key={id} sm="6" lg="3">
+                <Col key={id} xs="6" lg="3">
                   <PokemonCard id={pokemonId} />
                 </Col>
               ))}
