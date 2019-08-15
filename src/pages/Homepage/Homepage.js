@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useCallback } from 'react';
+import React, { memo, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import PokemonCard from 'components/PokemonCard/PokemonCard';
@@ -14,8 +14,8 @@ const Homepage = memo(function Homepage() {
   const dispatch = useDispatch();
   const randomPokemonData = useSelector(state => state.randomPokemonData);
   const defaultPokemonData = useSelector(state => state.defaultPokemonData);
-
   const defaultPokemonIds = useSelector(state => state.defaultPokemonIds);
+
   useEffect(() => {
     if (!defaultPokemonData.length && defaultPokemonIds) {
       defaultPokemonIds.forEach(id => {
@@ -26,24 +26,17 @@ const Homepage = memo(function Homepage() {
     }
   }, [defaultPokemonIds, defaultPokemonData, dispatch]);
 
-  const [randomPokemonId, setRandomPokemonId] = useState(0);
-  useEffect(() => {
-    if (!randomPokemonData && randomPokemonId) {
-      dispatch(setLoading(true));
-
-      fetchPokemon(randomPokemonId)
-        .then(data => dispatch(setRandomPokemonData(data)))
-        .catch(error => console.log(error.message))
-        .finally(() => dispatch(setLoading(false)));
-    }
-  }, [randomPokemonData, randomPokemonId, dispatch]);
-
   const handleGenerate = useCallback(() => {
-    setRandomPokemonId(Math.trunc(Math.random() * API_MAX) + 1);
-  }, []);
+    const randomPokemonId = Math.trunc(Math.random() * API_MAX) + 1;
+    dispatch(setLoading(true));
+
+    fetchPokemon(randomPokemonId)
+      .then(data => dispatch(setRandomPokemonData(data)))
+      .catch(error => console.log(error.message))
+      .finally(() => dispatch(setLoading(false)));
+  }, [dispatch]);
 
   const handleReset = useCallback(() => {
-    setRandomPokemonId(null);
     dispatch(setRandomPokemonData(null));
   }, [dispatch]);
 
@@ -78,7 +71,7 @@ const Homepage = memo(function Homepage() {
         <div className="homepage__button-wrapper">
           <h2>Generate a random Pokemon:</h2>
 
-          <Button color="primary" outline className="homepage__generate-button" onClick={handleGenerate}>
+          <Button color="primary" className="homepage__generate-button" onClick={handleGenerate}>
             Random Pokemon
           </Button>
 

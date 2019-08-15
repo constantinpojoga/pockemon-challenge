@@ -36,13 +36,17 @@
     position: fixed;
     right: 0%;
     top: 0;
-    width: 315px;
+    width: 100%;
     min-height: 100vh;
     background: $white;
     padding: 130px 90px;
     z-index: 20;
     transform: translateX(100%);
     transition: all 0.4s ease-in-out;
+
+    @media screen and (min-width: 768px) {
+      max-width: 315px;
+    }
 
     &--open {
       transform: translateX(0);
