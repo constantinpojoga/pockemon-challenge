@@ -1,5 +1,7 @@
 import {
   SET_LOADING,
+  ADD_DEFAULT_POKEMON_DATA,
+  SET_RANDOM_POKEMON_DATA,
 } from 'store/action-types';
 
 const reducer = (state = {}, action) => {
@@ -10,6 +12,16 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         loading: action.loading,
+      };
+    case ADD_DEFAULT_POKEMON_DATA:
+      return {
+        ...state,
+        defaultPokemonData: [...state.defaultPokemonData, action.pokemonData],
+      };
+    case SET_RANDOM_POKEMON_DATA:
+      return {
+        ...state,
+        randomPokemonData: action.pokemonData,
       };
     default:
       return state;

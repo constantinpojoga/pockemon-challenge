@@ -23,4 +23,34 @@
   &__generate-button {
     margin-right: 15px;
   }
+
+  &__placeholder {
+    margin-bottom: 30px;
+    padding: 20px;
+    min-height: 240px;
+    font-size: 14px;
+    text-align: center;
+    cursor: default;
+    pointer-events: none;
+    background-color: $lightGray;
+
+    @media screen and (min-width: 992px) {
+      font-size: 15px;
+    }
+  }
+
+  &__placeholder-name {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 16px;
+
+    @media screen and (min-width: 992px) {
+      font-size: 20px;
+    }
+  }
+
+  &__placeholder-image {
+    width: 80px;
+    margin: 20px auto;
+  }
 }
