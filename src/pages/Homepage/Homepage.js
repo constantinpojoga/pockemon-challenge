@@ -16,14 +16,14 @@ const Homepage = memo(function Homepage() {
 
   const defaultPokemonIds = useSelector(state => state.defaultPokemonIds);
   useEffect(() => {
-    if (defaultPokemonIds) {
+    if (!defaultPokemonData.length && defaultPokemonIds) {
       defaultPokemonIds.forEach(id => {
         fetchPokemon(id)
           .then(data => dispatch(addDefaultPokemonData(data)))
           .catch(reason => console.log(reason.message));
       });
     }
-  }, [defaultPokemonIds, dispatch]);
+  }, [defaultPokemonIds, defaultPokemonData, dispatch]);
 
   const [randomPokemonId, setRandomPokemonId] = useState(0);
   useEffect(() => {

@@ -35,15 +35,15 @@ const NavMenu = memo(function NavMenu({ menuIsOpen, handleClose }) {
           </li>
 
           <li className="nav__list-item">
-            <NavLink to="/test-page" className="nav__link" activeClassName="nav__link--active">Test Page</NavLink>
+            <NavLink to="/random-pokemon" className="nav__link" activeClassName="nav__link--active">Random</NavLink>
           </li>
 
           <li className="nav__list-item">
-            <NavLink to="/test-page1" className="nav__link" activeClassName="nav__link--active">Test Page</NavLink>
+            <NavLink to="/test-page1" className="nav__link" activeClassName="nav__link--active">Test Link</NavLink>
           </li>
 
           <li className="nav__list-item">
-            <NavLink to="/test-page1" className="nav__link" activeClassName="nav__link--active">Test Page</NavLink>
+            <NavLink to="/test-page1" className="nav__link" activeClassName="nav__link--active">Test Link</NavLink>
           </li>
         </ul>
       </div>

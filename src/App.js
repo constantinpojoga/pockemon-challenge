@@ -10,6 +10,7 @@ import './App.scss';
 
 // Pages
 const Homepage = lazy(() => import('pages/Homepage/Homepage'));
+const RandomPokemon = lazy(() => import('pages/RandomPokemon/RandomPokemon'));
 
 function App() {
   return (
@@ -23,8 +24,8 @@ function App() {
               <div className="main">
                 <Suspense fallback={<></>}>
                   <Switch>
-                    {/* <Route exact path="/character/id" component={Character} /> */}
                     <Route exact path="/" component={Homepage} />
+                    <Route exact path="/random-pokemon" component={RandomPokemon} />
                     <Redirect to="/" />
                   </Switch>
                 </Suspense>
